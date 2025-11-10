@@ -1,0 +1,20 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")   // Supabaseのpgbouncer/通常どちらでも可
+  directUrl = env("DIRECT_URL")     // マイグレーション用に“通常URI”をセット
+}
+
+model Pet {
+  id        Int      @id @default(autoincrement())
+  species   String
+  name      String
+  role      String
+  comment   String
+  emoji     String?
+  createdAt DateTime @default(now())
+}
